@@ -4,7 +4,7 @@ project(laser_filters)
 ##############################################################################
 # Find dependencies
 ##############################################################################
-
+find_package(Boost 1.55.0 REQUIRED COMPONENTS system)
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
