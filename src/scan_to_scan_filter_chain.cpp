@@ -94,7 +94,7 @@ public:
     }
     
     // Advertise output
-    output_pub_ = nh_->create_publisher<sensor_msgs::msg::LaserScan>("scan_filtered", 1000);
+    output_pub_ = nh_->create_publisher<sensor_msgs::msg::LaserScan>("scan_filtered", rclcpp::SensorDataQoS());
   }
 
   // Destructor
