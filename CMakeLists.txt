@@ -8,17 +8,26 @@ find_package(Boost 1.55.0 REQUIRED COMPONENTS system)
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
+include_directories(laser_scan_filters ${Boost_INCLUDE_DIRS})
+
 ##############################################################################
 # Build
 ##############################################################################
 
 ament_auto_add_library(laser_scan_filters SHARED src/laser_scan_filters.cpp)
+link_directories(laser_scan_filters ${Boost_LIBRARY_DIRS})
+target_link_libraries(laser_scan_filters ${Boost_LIBRARIES})
 
 set(FILTER_CHAINS
     scan_to_cloud_filter_chain
     scan_to_scan_filter_chain
     generic_laser_filter_node
 )
+
+set(LIBS
+-lboost_system
+)
+
 foreach(FILTER_CHAIN ${FILTER_CHAINS})
     ament_auto_add_executable(${FILTER_CHAIN} src/${FILTER_CHAIN}.cpp)
 endforeach()
